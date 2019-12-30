@@ -1,0 +1,15 @@
+({
+	init : function(component, event, helper) {
+        let sObjectNamevar = component.get('v.sObjectName');
+        let currentRecordId = component.get("v.recordId");
+
+        if(sObjectNamevar  == $A.get("$Label.c.sObjectAccount") && currentRecordId != null){
+       		let flow = component.find("FastContactFlow");
+            flow.startFlow("Contacts_and_Emails");
+            component.set('v.cantRunFlow',false);
+        }else{
+            component.set('v.cantRunFlow',true);
+    }   
+    alert(currentRecordId);
+    }
+})

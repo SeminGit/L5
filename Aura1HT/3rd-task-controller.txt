@@ -1,0 +1,35 @@
+({
+    checkValue : function(component, event, helper) {
+            let number = component.get('v.number');
+            var toastEvent = $A.get("e.force:showToast");
+            toastEvent.setParams({
+                "title": $A.get("$Label.c.EForceEventTitle"),
+                "message": $A.get("$Label.c.NumberShouldBePositive")});
+
+            if(number > 0){
+                component.set("v.buttonEnabled", false);
+            }else if(number < 0){
+                toastEvent.fire();
+                component.set("v.buttonEnabled", true);
+            }else{
+                component.set("v.buttonEnabled", true);
+            }
+    },
+    calculateMethod : function(component, event, helper){
+            let number = component.get("v.number");
+            var toastEvent = $A.get("e.force:showToast");
+            toastEvent.setParams({
+                "title": $A.get("$Label.c.EForceEventTitle"),
+                "message": $A.get("$Label.c.NumberIsNotSimpleMessage")});
+
+            for(let i = 2; i <= number/2; i++){ 
+                if((number % i) == 0){
+                    component.set("v.isSimple", false);
+                    toastEvent.fire();        
+                    return;
+                }
+            }
+            
+            component.set("v.isSimple", true);
+    }
+})
