@@ -1,8 +1,8 @@
 ({
-    Show : function(messageText) {
+    Show : function(messageText, titleText) {
         var toastEvent = $A.get("e.force:showToast");
             toastEvent.setParams({
-                "title": $A.get("$Label.c.EForceEventTitle"),
+                "title": titleText,
                 "message": messageText});
         toastEvent.fire();
     }
