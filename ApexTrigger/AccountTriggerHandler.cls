@@ -31,18 +31,13 @@ public class AccountTriggerHandler extends TriggerHandler{
             // if name was changed:
             if(accountsBeforeUpdate[i].Name != newAccounts[i].Name){
                 
-                List<Contact> accountContacts = new List<Contact>();
-                 // search account's contacts
                 for(Contact contact : contacts){
                     if(contact.AccountId == newAccounts[i].Id){
-                        accountContacts.Add(contact);
+                        contact.FirstName = newAccounts[i].Name;
+                        contactsForUpdate.add(contact);
                     }
                 }
-                // change names
-                for(Contact temp : accountContacts){
-                    temp.FirstName = newAccounts[i].Name;
-                    contactsForUpdate.Add(temp);
-                }
+
 			}
         }
         
