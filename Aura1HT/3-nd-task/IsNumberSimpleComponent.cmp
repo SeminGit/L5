@@ -1,0 +1,35 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+
+    <aura:attribute name="number" type="Integer" default="1" />
+    <aura:attribute name="isSimple" type="Boolean" default="false" />
+    
+    <lightning:card  title="{!$Label.c.TitleNumberIsSimpleCard}"> 
+        <div class = "slds-m-around_small">
+            <lightning:input             
+                type="number" name="inputField" 
+                label="{!$Label.c.InputNumberTitle}" 
+                value = "{!v.number}"
+                min = "1"
+                messageWhenRangeUnderflow="{!$Label.c.NumberShouldBePositive}"
+                onchange="{!c.refresh}"/>
+        </div>
+        <div class="slds-m-around_small">
+            <lightning:helptext content="{!$Label.c.CheckNumberSimpleInfo}"/>
+            <lightning:button label="Calculate" onclick="{!c.calculate}" disabled="{!lessthan(v.number,1)}" />            </div>
+        <div class = "slds-m-around_small">
+            <aura:if isTrue="{!v.isSimple}">
+                <ol>
+                    <li>
+                        <lightning:icon iconName="action:approval" alternativeText="alternativeText" size="medium"/>                    
+                    </li>
+                    <li>
+                        <ui:message title="Result" severity="confirm" closable="false">
+                            <b>{#v.number}{!$Label.c.NumberIsSimple}</b>
+                        </ui:message>    
+                    </li>
+                </ol>
+            </aura:if>
+        </div>
+    </lightning:card>
+
+</aura:component>
